@@ -1,0 +1,51 @@
+package com.wefox.payment.processor.core.model;
+
+import com.wefox.payment.processor.core.model.global.AbstractProcessorDomainModel;
+import lombok.Builder;
+import lombok.Getter;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Positive;
+import java.time.LocalDateTime;
+import java.util.Comparator;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+@Getter
+@Builder
+public class Account extends AbstractProcessorDomainModel {
+
+    @Positive
+    private final Long id;
+    @Email(message = "The email must has a valid format")
+    private String email;
+    @PastOrPresent(message = "Invalid account creation date")
+    private final LocalDateTime createdAt;
+    @PastOrPresent(message = "Invalid account birth date")
+    private final LocalDateTime birthDate;
+    private Set<Payment> payments;
+
+    /**
+     * This method is in charge of updating the list of {@link Payment} associated
+     * to the {@link Account}
+     * @param payment the new {@link Payment} received
+     */
+    public Account addNewPayments(final Payment... payment)
+    {
+        this.payments.addAll(payments.stream().filter(Payment::isValid).collect(Collectors.toSet()));
+        return this;
+    }
+
+    /**
+     * This method is in charge of retrieving the last {@link Payment} date
+     * @return a {@link LocalDateTime} with its last payment date
+     */
+    public Optional<LocalDateTime> findLastPaymentDate()
+    {
+        return this.payments.parallelStream()
+                .min(Comparator.comparing(Payment::getCreatedAt))
+                .map(Payment::getCreatedAt);
+    }
+}
