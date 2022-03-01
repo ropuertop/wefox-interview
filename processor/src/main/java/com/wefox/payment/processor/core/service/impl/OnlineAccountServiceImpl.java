@@ -32,18 +32,18 @@ public class OnlineAccountServiceImpl implements IAccountService {
 
     @Override
     @Transactional
-    @Cacheable(key = "#accountId", unless = "#result.hardback")
-    public final Optional<Account> addNewPayments(Integer accountId, Payment... payments) {
+    public final Account addNewPayments(Account account, Payment... payments) {
 
         // filtering by the third party validator
         final var validPayments = Arrays.stream(payments)
                 .filter(this.paymentVerificator::validatePayment)
                 .toArray(Payment[]::new);
 
-        // updating the account with the new payments
-        return this.accountRepository.findById(accountId)
-                .map(account -> account.addNewPayments(validPayments))
-                .map(this.accountRepository::save);
+        // updating the new payments
+        account.addNewPayments(validPayments);
+
+        // storing and returning the updated account
+        return this.accountRepository.save(account);
     }
 
     @Override

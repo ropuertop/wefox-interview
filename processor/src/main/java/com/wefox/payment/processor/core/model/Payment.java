@@ -8,7 +8,13 @@ import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
+import com.wefox.payment.processor.ProcessorApplication;
 
+/**
+ * This {@link Payment} class will represent the payments that the {@link ProcessorApplication} will process
+ *
+ * @author ropuertop
+ */
 @Getter
 @Builder
 public class Payment extends AbstractProcessorDomainModel {

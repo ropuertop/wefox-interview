@@ -8,7 +8,7 @@ import java.util.Set;
 
 /**
  * This class is in charge of declaring the global behavior of the domain models.
- * Every model must extend from this class.
+ * Every domain model must extend from this class.
  *
  * @author ropuertop
  */

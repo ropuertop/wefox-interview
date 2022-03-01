@@ -9,10 +9,22 @@ import org.springframework.cache.annotation.Cacheable;
 
 import javax.transaction.Transactional;
 import java.util.Optional;
+import com.wefox.payment.processor.external.db.impl.PSQLAccountRepositoryImpl;
 
+/**
+ * This class is in charge of defining the {@link IAccountService} for the offline
+ * topic paths
+ *
+ * @author ropuertop
+ */
 @CacheConfig(cacheNames = "accounts")
 public class OfflineAccountServiceImpl implements IAccountService {
 
+    /**
+     * This {@link IAccountRepository} implementation
+     *
+     * @see PSQLAccountRepositoryImpl
+     */
     private final IAccountRepository accountRepository;
 
     /**
@@ -27,13 +39,13 @@ public class OfflineAccountServiceImpl implements IAccountService {
     @Override
     @Transactional
     @Cacheable(key = "#accountId", unless = "#result.hardback")
-    public final Optional<Account> addNewPayments(final Integer accountId, final Payment... payments) {
+    public final Account addNewPayments(final Account account, final Payment... payments) {
 
         // updating the account with the new received payments
-        return this.accountRepository.findById(accountId)
-                .map(account -> account.addNewPayments(payments))
-                .filter(Account::isValid)
-                .map(this.accountRepository::save);
+        account.addNewPayments(payments);
+
+        // storing and returning the updated account
+        return this.accountRepository.save(account);
     }
 
     @Override

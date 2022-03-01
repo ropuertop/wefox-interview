@@ -6,9 +6,18 @@ import com.wefox.payment.processor.external.db.dao.AccountDAO;
 import com.wefox.payment.processor.external.db.entities.AccountEntity;
 
 import java.util.Optional;
+import org.springframework.data.jpa.repository.JpaRepository;
 
+/**
+ * This class is an implementation of the {@link IAccountRepository} for the PostgreSQL database driver
+ *
+ * @author ropuertop
+ */
 public class PSQLAccountRepositoryImpl implements IAccountRepository {
 
+    /**
+     * The {@link AccountDAO} {@link JpaRepository} that will be injected.
+     */
     private final AccountDAO accountDAO;
 
     /**

@@ -14,7 +14,13 @@ import java.util.Comparator;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+import com.wefox.payment.processor.ProcessorApplication;
 
+/**
+ * This {@link Account} domain model will be the aggregate root for the {@link ProcessorApplication}.
+ *
+ * @author ropuertop
+ */
 @Getter
 @Builder
 public class Account extends AbstractProcessorDomainModel {

@@ -44,8 +44,8 @@
 
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-stream-kafka</artifactId>
-s		</dependency>
+			<artifactId>spring-cloud-stream-binder-kafka</artifactId>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>

@@ -4,6 +4,12 @@ import com.wefox.payment.processor.core.model.Account;
 
 import java.util.Optional;
 
+/**
+ * This interface will be in charge of integrating with persistence layers and defining
+ * the needed functionality
+ *
+ * @author ropuertop
+ */
 public interface IAccountRepository {
 
     /**

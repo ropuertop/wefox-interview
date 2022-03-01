@@ -5,6 +5,12 @@ import com.wefox.payment.processor.core.model.Payment;
 
 import java.util.Optional;
 
+/**
+ * This interface is in charge of defining the {@link Account} behavior
+ * exposed to the API port.
+ *
+ * @author ropuertop
+ */
 public interface IAccountService {
 
     /**
@@ -13,7 +19,7 @@ public interface IAccountService {
      * @param payments new {@link Payment} to add into the account
      * @return the updated account
      */
-    Optional<Account> addNewPayments(final Integer accountId, final Payment... payments);
+    Account addNewPayments(final Account account, final Payment... payments);
 
     /**
      * This method is in charge of retrieving the {@link Account} associate to the passed {@link Integer} identifier

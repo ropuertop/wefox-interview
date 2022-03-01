@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Table(name = "accounts", schema = "payments")
 @NoArgsConstructor
-public final class AccountEntity implements IDBMapper<Account> {
+public class AccountEntity implements IDBMapper<Account> {
 
     @Id
     @Column(name = "account_id", updatable = false)
