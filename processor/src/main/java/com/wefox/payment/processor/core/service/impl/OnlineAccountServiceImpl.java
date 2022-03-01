@@ -8,6 +8,7 @@ import com.wefox.payment.processor.external.db.IAccountRepository;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 
+import javax.transaction.Transactional;
 import java.util.Arrays;
 import java.util.Optional;
 
@@ -17,6 +18,12 @@ public class OnlineAccountServiceImpl implements IAccountService {
     private final IPaymentVerificator paymentVerificator;
     private final IAccountRepository accountRepository;
 
+    /**
+     * Parameterized constructor with the bean injections associated to the {@link OnlineAccountServiceImpl}
+     *
+     * @param paymentVerificator the current {@link IPaymentVerificator} bean component
+     * @param accountRepository the current {@link IAccountRepository} bean implementation
+     */
     public OnlineAccountServiceImpl(final IPaymentVerificator paymentVerificator,
                                     final IAccountRepository accountRepository) {
         this.paymentVerificator = paymentVerificator;
@@ -24,6 +31,7 @@ public class OnlineAccountServiceImpl implements IAccountService {
     }
 
     @Override
+    @Transactional
     @Cacheable(key = "#accountId", unless = "#result.hardback")
     public final Optional<Account> addNewPayments(Integer accountId, Payment... payments) {
 
@@ -32,13 +40,16 @@ public class OnlineAccountServiceImpl implements IAccountService {
                 .filter(this.paymentVerificator::validatePayment)
                 .toArray(Payment[]::new);
 
+        // updating the account with the new payments
         return this.accountRepository.findById(accountId)
                 .map(account -> account.addNewPayments(validPayments))
                 .map(this.accountRepository::save);
     }
 
     @Override
+    @Transactional
+    @Cacheable(key = "#accountId", unless = "#result.hardback")
     public final Optional<Account> getAccount(Integer accountId) {
-        return Optional.empty();
+        return this.accountRepository.findById(accountId);
     }
 }
