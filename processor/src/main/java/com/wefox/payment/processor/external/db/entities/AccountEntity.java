@@ -2,24 +2,29 @@ package com.wefox.payment.processor.external.db.entities;
 
 import com.wefox.payment.processor.core.model.Account;
 import com.wefox.payment.processor.external.db.utils.IDBMapper;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@Data
 @Builder
+@Getter
+@Setter
 @Entity
+@ToString
+@RequiredArgsConstructor
 @Table(name = "accounts", schema = "payments")
-public class AccountEntity implements IDBMapper<Account> {
+@NoArgsConstructor
+public final class AccountEntity implements IDBMapper<Account> {
 
     @Id
     @Column(name = "account_id", updatable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private final Integer accountId;
+    private Integer accountId;
 
     @Column(name = "name")
     private String name;
@@ -28,16 +33,17 @@ public class AccountEntity implements IDBMapper<Account> {
     private String email;
 
     @Column(name = "birthdate")
-    private final LocalDateTime birthdate;
+    private LocalDateTime birthdate;
 
     @Column(name = "last_payment_date")
     private LocalDateTime lastPaymentDate;
 
     @Column(name = "created_on")
-    private final LocalDateTime createdAt;
+    private LocalDateTime createdAt;
 
     @OneToMany(cascade = {CascadeType.ALL})
     @JoinColumn
+    @ToString.Exclude
     private Set<PaymentEntity> payments;
 
     @Override
@@ -67,5 +73,18 @@ public class AccountEntity implements IDBMapper<Account> {
                 .lastPaymentDate(domainModel.findLastPaymentDate().orElse(null))
                 .email(domainModel.getEmail())
                 .build();
+    }
+
+    @Override
+    public final boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        AccountEntity that = (AccountEntity) o;
+        return accountId != null && Objects.equals(accountId, that.accountId);
+    }
+
+    @Override
+    public final int hashCode() {
+        return getClass().hashCode();
     }
 }
