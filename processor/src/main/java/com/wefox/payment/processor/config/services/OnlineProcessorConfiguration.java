@@ -1,14 +1,18 @@
-package com.wefox.payment.processor.config;
+package com.wefox.payment.processor.config.services;
 
+import com.wefox.payment.processor.api.functions.OnlineConsumerService;
 import com.wefox.payment.processor.core.service.IAccountService;
 import com.wefox.payment.processor.core.service.impl.OnlineAccountServiceImpl;
 import com.wefox.payment.processor.external.client.verificator.IPaymentVerificator;
 import com.wefox.payment.processor.external.db.IAccountRepository;
+import org.hibernate.boot.archive.internal.FileInputStreamAccess;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
 
 @Configuration
+@DependsOn({"processor/external/client/verificator", "processor/external/repository/service"})
 public class OnlineProcessorConfiguration {
 
     @Bean("processor/online/service")

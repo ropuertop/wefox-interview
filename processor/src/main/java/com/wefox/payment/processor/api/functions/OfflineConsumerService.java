@@ -1,6 +1,6 @@
 package com.wefox.payment.processor.api.functions;
 
-import com.wefox.payment.processor.api.model.types.OfflinePaymentDTO;
+import com.wefox.payment.processor.api.model.PaymentDTO;
 import com.wefox.payment.processor.core.model.Account;
 import com.wefox.payment.processor.core.service.IAccountService;
 import com.wefox.payment.processor.core.service.impl.OfflineAccountServiceImpl;
@@ -8,7 +8,8 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
+import org.springframework.stereotype.Service;
 
 import java.util.function.Consumer;
 
@@ -18,7 +19,8 @@ import java.util.function.Consumer;
  * @author ropuertop
  */
 @Log4j2
-@Configuration
+@Service
+@DependsOn("processor/offline/service")
 public class OfflineConsumerService {
 
     /**
@@ -40,28 +42,32 @@ public class OfflineConsumerService {
         this.accountService = accountService;
     }
 
+    /**
+     * This method is in charge of being the entrypoint of the offline topic messages
+     *
+     * @return a new {@link Consumer} with the processor behavior
+     */
     @Bean
-    public Consumer<OfflinePaymentDTO> offlinePayment() {
+    public Consumer<PaymentDTO> offlinePayment() {
 
         return offlinePaymentDTO -> {
 
             log.info("(offline) -> consuming the [{}] payment", offlinePaymentDTO.getPaymentId());
 
             // finding the related payment account
-            final var relatedAccount =  this.accountService
-                    .getAccount(offlinePaymentDTO.getAccountId())
-                    .filter(Account::isValid);
+            final var relatedAccount =  accountService
+                    .getAccount(offlinePaymentDTO.getAccountId());
 
             // if the account is present, we will try to update its payments
             relatedAccount.ifPresent(account -> {
+
+                // mapping the received payment dto into domain model
                 final var payment = offlinePaymentDTO.map(account);
 
                 // if the payment is valid, we update
-                if(Boolean.TRUE.equals(payment.isValid()))
-                {
-                    this.accountService.addNewPayments(account, payment);
-                }
+                final var persistedAccount = accountService.addNewPayments(account, payment);
 
+                log.info("(offline) -> consumed the [{}] payment: [{}]", offlinePaymentDTO.getPaymentId(), persistedAccount);
             });
         };
     }

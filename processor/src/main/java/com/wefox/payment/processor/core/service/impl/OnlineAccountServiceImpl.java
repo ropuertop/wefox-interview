@@ -12,7 +12,6 @@ import javax.transaction.Transactional;
 import java.util.Arrays;
 import java.util.Optional;
 
-@CacheConfig(cacheNames = "accounts")
 public class OnlineAccountServiceImpl implements IAccountService {
 
     private final IPaymentVerificator paymentVerificator;

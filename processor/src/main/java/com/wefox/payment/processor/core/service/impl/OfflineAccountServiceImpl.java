@@ -5,7 +5,6 @@ import com.wefox.payment.processor.core.model.Account;
 import com.wefox.payment.processor.core.model.Payment;
 import com.wefox.payment.processor.core.service.IAccountService;
 import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.Cacheable;
 
 import javax.transaction.Transactional;
 import java.util.Optional;
@@ -17,7 +16,6 @@ import com.wefox.payment.processor.external.db.impl.PSQLAccountRepositoryImpl;
  *
  * @author ropuertop
  */
-@CacheConfig(cacheNames = "accounts")
 public class OfflineAccountServiceImpl implements IAccountService {
 
     /**
@@ -37,9 +35,8 @@ public class OfflineAccountServiceImpl implements IAccountService {
     }
 
     @Override
-    @Transactional
 //    @Cacheable(key = "#accountId", unless = "#result.hardback")
-    public Account addNewPayments(final Account account, final Payment... payments) {
+    public Account addNewPayments(Account account, final Payment... payments) {
 
         // updating the account with the new received payments
         account.addNewPayments(payments);
@@ -49,7 +46,6 @@ public class OfflineAccountServiceImpl implements IAccountService {
     }
 
     @Override
-    @Transactional
 //    @Cacheable(key = "#accountId", unless = "#result.hardback")
     public Optional<Account> getAccount(final Integer accountId) {
         return this.accountRepository.findById(accountId);

@@ -10,10 +10,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Positive;
 import java.time.LocalDateTime;
-import java.util.Comparator;
-import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.*;
 import com.wefox.payment.processor.ProcessorApplication;
 
 /**
@@ -48,19 +45,18 @@ public class Account extends AbstractProcessorDomainModel {
      * to the {@link Account}
      * @param payment the new {@link Payment} received
      */
-    public Account addNewPayments(final Payment... payment)
+    public final void addNewPayments(final Payment... payment)
     {
-        this.payments.addAll(payments.stream().filter(Payment::isValid).collect(Collectors.toSet()));
-        return this;
+        Collections.addAll(this.payments, payment);
     }
 
     /**
      * This method is in charge of retrieving the last {@link Payment} date
      * @return a {@link LocalDateTime} with its last payment date
      */
-    public Optional<LocalDateTime> findLastPaymentDate()
+    public final Optional<LocalDateTime> findLastPaymentDate()
     {
-        return this.payments.parallelStream()
+        return this.payments.stream()
                 .min(Comparator.comparing(Payment::getCreatedAt))
                 .map(Payment::getCreatedAt);
     }

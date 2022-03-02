@@ -7,6 +7,7 @@ import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -40,8 +41,8 @@ public class AccountEntity implements IDBMapper<Account> {
     private LocalDateTime createdAt;
 
     @ToString.Exclude
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "account")
-    private Set<PaymentEntity> payments;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "account", fetch = FetchType.EAGER)
+    private Set<PaymentEntity> payments = new HashSet<>();
 
     @Override
     public final Account map() {

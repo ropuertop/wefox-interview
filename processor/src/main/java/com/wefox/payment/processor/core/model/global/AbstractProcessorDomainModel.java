@@ -1,6 +1,7 @@
 package com.wefox.payment.processor.core.model.global;
 
 import com.wefox.payment.processor.core.utils.functions.IValidator;
+import lombok.extern.log4j.Log4j2;
 
 import javax.validation.ConstraintViolation;
 import java.util.Objects;
@@ -12,6 +13,7 @@ import java.util.Set;
  *
  * @author ropuertop
  */
+@Log4j2
 public abstract class AbstractProcessorDomainModel implements IValidator {
 
     /**
@@ -26,6 +28,12 @@ public abstract class AbstractProcessorDomainModel implements IValidator {
         if(Objects.isNull(this.constraintViolations))
         {
             this.constraintViolations = VALIDATOR.validate(this);
+        }
+
+
+        if(Boolean.FALSE.equals(this.constraintViolations.isEmpty()))
+        {
+            log.warn("Invalid [{}]. It has the next errors [{}]", this.getClass().getName(), this.constraintViolations);
         }
 
         return this.constraintViolations.isEmpty();

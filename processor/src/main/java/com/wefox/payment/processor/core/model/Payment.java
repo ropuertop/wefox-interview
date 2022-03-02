@@ -19,7 +19,6 @@ import com.wefox.payment.processor.ProcessorApplication;
 @Builder
 public class Payment extends AbstractProcessorDomainModel {
 
-    @NotBlank(message = "The payment identifier must not be blank")
     private final UUID id;
 
     private final PaymentType type;
