@@ -43,11 +43,11 @@ public class Account extends AbstractProcessorDomainModel {
     /**
      * This method is in charge of updating the list of {@link Payment} associated
      * to the {@link Account}
-     * @param payment the new {@link Payment} received
+     * @param optNewPayments the new {@link Payment} received
      */
-    public final void addNewPayments(final Payment... payment)
+    public final void addNewPayments(final Payment... optNewPayments)
     {
-        Collections.addAll(this.payments, payment);
+        Optional.ofNullable(optNewPayments).ifPresent(newPayments -> Collections.addAll(this.payments, newPayments));
     }
 
     /**
@@ -57,7 +57,7 @@ public class Account extends AbstractProcessorDomainModel {
     public final Optional<LocalDateTime> findLastPaymentDate()
     {
         return this.payments.stream()
-                .min(Comparator.comparing(Payment::getCreatedAt))
-                .map(Payment::getCreatedAt);
+                .flatMap(payment -> Optional.ofNullable(payment.getCreatedAt()).stream())
+                .max(LocalDateTime::compareTo);
     }
 }

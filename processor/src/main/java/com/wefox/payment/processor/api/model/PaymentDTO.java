@@ -34,14 +34,13 @@ public final class PaymentDTO{
     private final Integer amount;
     private final Integer delay;
 
-    public Payment map(Account account) {
+    public Payment map() {
         return Payment.builder()
                 .id(UUID.fromString(this.paymentId))
                 .type(PaymentType.valueOf(this.paymentType.toUpperCase()))
                 .createdAt(this.createdAt)
                 .creditCard(this.creditCard)
                 .amount(BigDecimal.valueOf(this.amount))
-                .account(account)
                 .build();
     }
 }

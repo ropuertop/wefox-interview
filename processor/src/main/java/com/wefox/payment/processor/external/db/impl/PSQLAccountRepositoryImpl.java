@@ -47,7 +47,13 @@ public class PSQLAccountRepositoryImpl implements IAccountRepository {
     @Override
     public final Account save(final Account account) {
         log.info("(PSQLAccountRepositoryImpl) -> (save): saving the account related with [{}] with the payments [{}]", account.getId(), account.getPayments().stream().map(Payment::getId));
-        this.paymentDAO.saveAll(account.getPayments().stream().map(PaymentEntity::map).collect(Collectors.toSet()));
+        this.paymentDAO.saveAll(account.getPayments().stream()
+                .map(PaymentEntity::map)
+                .map(paymentEntity -> {
+                    paymentEntity.setAccount(AccountEntity.map(account));
+                    return paymentEntity;
+                })
+                .collect(Collectors.toSet()));
         return this.accountDAO.save(AccountEntity.map(account)).map();
     }
 }

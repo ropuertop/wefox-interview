@@ -42,7 +42,6 @@ public class PaymentEntity implements IDBMapper<Payment> {
     @Override
     public final Payment map() {
         return Payment.builder()
-                .account(this.account.map())
                 .amount(this.amount)
                 .createdAt(this.createdAt)
                 .creditCard(this.creditCard)

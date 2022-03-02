@@ -5,10 +5,7 @@ import com.wefox.payment.processor.core.model.Payment;
 import com.wefox.payment.processor.core.service.IAccountService;
 import com.wefox.payment.processor.external.client.verificator.IPaymentVerificator;
 import com.wefox.payment.processor.external.db.IAccountRepository;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.Cacheable;
 
-import javax.transaction.Transactional;
 import java.util.Arrays;
 import java.util.Optional;
 
@@ -30,7 +27,6 @@ public class OnlineAccountServiceImpl implements IAccountService {
     }
 
     @Override
-    @Transactional
     public Account addNewPayments(Account account, Payment... payments) {
 
         // filtering by the third party validator
@@ -46,8 +42,6 @@ public class OnlineAccountServiceImpl implements IAccountService {
     }
 
     @Override
-    @Transactional
-//    @Cacheable(key = "#accountId", unless = "#result.hardback")
     public Optional<Account> getAccount(Integer accountId) {
         return this.accountRepository.findById(accountId);
     }
