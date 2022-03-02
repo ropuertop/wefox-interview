@@ -11,13 +11,11 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@Builder
 @Getter
 @Setter
 @Entity
 @ToString
-@RequiredArgsConstructor
-@Table(name = "accounts", schema = "payments")
+@Table(name = "accounts", schema = "public")
 @NoArgsConstructor
 public class AccountEntity implements IDBMapper<Account> {
 
@@ -32,7 +30,7 @@ public class AccountEntity implements IDBMapper<Account> {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(name = "birthdate")
+    @Column(name = "birthdate", columnDefinition = "DATE")
     private LocalDateTime birthdate;
 
     @Column(name = "last_payment_date")
@@ -41,9 +39,8 @@ public class AccountEntity implements IDBMapper<Account> {
     @Column(name = "created_on")
     private LocalDateTime createdAt;
 
-    @OneToMany(cascade = {CascadeType.ALL})
-    @JoinColumn
     @ToString.Exclude
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "account")
     private Set<PaymentEntity> payments;
 
     @Override
@@ -65,14 +62,17 @@ public class AccountEntity implements IDBMapper<Account> {
      * @return a new {@link AccountEntity} filled with the domain {@link Account} data
      */
     public static AccountEntity map(final Account domainModel) {
-        return AccountEntity.builder()
-                .accountId(domainModel.getId().intValue())
-                .name(domainModel.getName())
-                .birthdate(domainModel.getBirthDate())
-                .createdAt(domainModel.getCreatedAt())
-                .lastPaymentDate(domainModel.findLastPaymentDate().orElse(null))
-                .email(domainModel.getEmail())
-                .build();
+
+        var newAccount = new AccountEntity();
+
+        newAccount.setAccountId(domainModel.getId().intValue());
+        newAccount.setName(domainModel.getName());
+        newAccount.setBirthdate(domainModel.getBirthDate());
+        newAccount.setCreatedAt(domainModel.getCreatedAt());
+        newAccount.setLastPaymentDate(domainModel.findLastPaymentDate().orElse(null));
+        newAccount.setEmail(domainModel.getEmail());
+
+        return newAccount;
     }
 
     @Override

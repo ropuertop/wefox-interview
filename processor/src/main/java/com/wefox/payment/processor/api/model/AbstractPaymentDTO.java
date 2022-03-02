@@ -2,13 +2,14 @@ package com.wefox.payment.processor.api.model;
 
 import com.wefox.payment.processor.core.model.Account;
 import com.wefox.payment.processor.core.model.Payment;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
 
 @Getter
-@Builder
+@AllArgsConstructor
 public abstract class AbstractPaymentDTO<E extends Payment, T extends Account>{
 
     protected final String paymentId;

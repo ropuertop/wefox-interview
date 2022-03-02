@@ -15,11 +15,8 @@ import java.util.UUID;
 @Getter
 @Setter
 @ToString
-@RequiredArgsConstructor
-@Builder
 @Entity
-@Table(name = "payments", schema = "payments")
-@NoArgsConstructor
+@Table(name = "payments", schema = "public")
 public class PaymentEntity implements IDBMapper<Payment> {
 
     @Id
@@ -33,19 +30,20 @@ public class PaymentEntity implements IDBMapper<Payment> {
     private String creditCard;
 
     @Column(name = "amount", nullable = false)
-    private Integer amount;
+    private BigDecimal amount;
 
-    @Column(name = "created_at")
+    @Column(name = "created_on")
     private LocalDateTime createdAt;
 
-    @ManyToOne(fetch = FetchType.EAGER, targetEntity = AccountEntity.class, optional = false)
+    @JoinColumn(name = "account_id")
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     private AccountEntity account;
 
     @Override
     public final Payment map() {
         return Payment.builder()
                 .account(this.account.map())
-                .amount(BigDecimal.valueOf(this.amount))
+                .amount(this.amount)
                 .createdAt(this.createdAt)
                 .creditCard(this.creditCard)
                 .id(UUID.fromString(this.paymentId))
@@ -60,13 +58,16 @@ public class PaymentEntity implements IDBMapper<Payment> {
      * @return a new {@link PaymentEntity} filled with the domain {@link Payment} data
      */
     public static PaymentEntity map(final Payment domainModel) {
-        return PaymentEntity.builder()
-                .paymentId(domainModel.getId().toString())
-                .paymentType(domainModel.getType().name())
-                .creditCard(domainModel.getCreditCard())
-                .amount(domainModel.getAmount().intValue())
-                .createdAt(domainModel.getCreatedAt())
-                .build();
+
+        var newPayment = new PaymentEntity();
+
+        newPayment.setPaymentId(domainModel.getId().toString());
+        newPayment.setPaymentType(domainModel.getType().name());
+        newPayment.setCreditCard(domainModel.getCreditCard());
+        newPayment.setAmount(domainModel.getAmount());
+        newPayment.setCreatedAt(domainModel.getCreatedAt());
+
+        return newPayment;
     }
 
 

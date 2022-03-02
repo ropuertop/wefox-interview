@@ -7,6 +7,7 @@ import com.wefox.payment.processor.core.utils.enums.PaymentType;
 import lombok.Builder;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 /**
@@ -14,8 +15,16 @@ import java.util.UUID;
  *
  * @author ropuertop
  */
-@Builder
 public final class OfflinePaymentDTO extends AbstractPaymentDTO<Payment, Account> {
+
+    public OfflinePaymentDTO(final String paymentId,
+                             final Integer accountId,
+                             final String paymentType,
+                             final String creditCard,
+                             final Integer amount,
+                             final LocalDateTime createdAt) {
+        super(paymentId, accountId, paymentType, creditCard, amount, createdAt);
+    }
 
     @Override
     public Payment map(Account account) {

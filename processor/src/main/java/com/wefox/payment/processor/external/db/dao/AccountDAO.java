@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
  *
  * @author ropuertop
  */
-@Repository
+@Repository("processor/external/repository/dao/accounts")
 public interface AccountDAO extends JpaRepository<AccountEntity, Integer> {
 
 }

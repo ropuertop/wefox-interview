@@ -1,13 +1,26 @@
 spring:
+    datasource:
+        url: jdbc:postgresql://localhost:5432/payments
+        username: tech
+        password: test
+    jpa:
+      database-platform: org.hibernate.dialect.PostgreSQLDialect
+      show-sql: false
+      hibernate:
+        ddl-auto: validate
     cloud:
         stream:
-            kafka:
-                binder:
-                    brokers: localhost:29092
+          function:
             bindings:
-                onlinePayments:
-                    destination: online
-                    contentType: application/json
-                offlinePayments:
-                    destination: offline
-                    contentType: application/json
+              offlinePayment-in-0: offline
+              onlinePayment-in-0: online
+            definition: onlinePayment;offlinePayment
+          kafka:
+            bindings:
+              offline:
+                destination: offline
+              online:
+                destination: online
+            binder:
+              brokers:
+                - localhost:29092

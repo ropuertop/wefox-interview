@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
  *
  * @author ropuertop
  */
-@Repository
+@Repository("processor/external/repository/dao/payments")
 public interface PaymentDAO extends JpaRepository<PaymentEntity, String> {
 }

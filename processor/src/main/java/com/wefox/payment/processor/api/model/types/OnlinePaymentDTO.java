@@ -4,13 +4,22 @@ import com.wefox.payment.processor.api.model.AbstractPaymentDTO;
 import com.wefox.payment.processor.core.model.Account;
 import com.wefox.payment.processor.core.model.Payment;
 import com.wefox.payment.processor.core.utils.enums.PaymentType;
-import lombok.Builder;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
-@Builder
 public final class OnlinePaymentDTO extends AbstractPaymentDTO<Payment, Account> {
+
+    public OnlinePaymentDTO(final String paymentId,
+                            final Integer accountId,
+                            final String paymentType,
+                            final String creditCard,
+                            final Integer amount,
+                            final LocalDateTime createdAt) {
+        super(paymentId, accountId, paymentType, creditCard, amount, createdAt);
+    }
+
     @Override
     public Payment map(Account account) {
         return Payment.builder()
