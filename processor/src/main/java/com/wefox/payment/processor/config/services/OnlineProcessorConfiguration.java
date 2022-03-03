@@ -10,12 +10,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 
 @Configuration
-@DependsOn({"processor/external/client/verificator", "processor/external/repository/service"})
+@DependsOn({"processor/external/client/verification", "processor/external/repository/service"})
 public class OnlineProcessorConfiguration {
 
     @Bean("processor/online/service")
     public IAccountService onlineAccountService(
-            @Qualifier("processor/external/client/verificator") final IPaymentVerificator paymentVerificator,
+            @Qualifier("processor/external/client/verification") final IPaymentVerificator paymentVerificator,
             @Qualifier("processor/external/repository/service") final IAccountRepository accountRepository
     )
     {

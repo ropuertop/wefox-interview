@@ -4,6 +4,7 @@ import com.wefox.payment.processor.core.model.Payment;
 import com.wefox.payment.processor.core.utils.enums.PaymentType;
 import com.wefox.payment.processor.external.db.utils.IDBMapper;
 import lombok.*;
+import lombok.experimental.Accessors;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
@@ -16,6 +17,7 @@ import java.util.UUID;
 @Setter
 @ToString
 @Entity
+@Accessors(fluent = true, chain = true)
 @Table(name = "payments", schema = "public")
 public class PaymentEntity implements IDBMapper<Payment> {
 
@@ -46,7 +48,7 @@ public class PaymentEntity implements IDBMapper<Payment> {
                 .createdAt(this.createdAt)
                 .creditCard(this.creditCard)
                 .id(UUID.fromString(this.paymentId))
-                .type(PaymentType.valueOf(paymentType))
+                .type(PaymentType.valueOf(this.paymentType.toUpperCase()))
                 .build();
     }
 
@@ -60,11 +62,11 @@ public class PaymentEntity implements IDBMapper<Payment> {
 
         var newPayment = new PaymentEntity();
 
-        newPayment.setPaymentId(domainModel.getId().toString());
-        newPayment.setPaymentType(domainModel.getType().name());
-        newPayment.setCreditCard(domainModel.getCreditCard());
-        newPayment.setAmount(domainModel.getAmount());
-        newPayment.setCreatedAt(domainModel.getCreatedAt());
+        newPayment.paymentId(domainModel.getId().toString());
+        newPayment.paymentType(domainModel.getType().name().toLowerCase());
+        newPayment.creditCard(domainModel.getCreditCard());
+        newPayment.amount(domainModel.getAmount());
+        newPayment.createdAt(domainModel.getCreatedAt());
 
         return newPayment;
     }

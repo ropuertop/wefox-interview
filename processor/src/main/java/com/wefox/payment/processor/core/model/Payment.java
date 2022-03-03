@@ -32,4 +32,5 @@ public class Payment extends AbstractProcessorDomainModel {
     @PastOrPresent(message = "Invalid payment creation date")
     private final LocalDateTime createdAt;
 
+    private Account account;
 }

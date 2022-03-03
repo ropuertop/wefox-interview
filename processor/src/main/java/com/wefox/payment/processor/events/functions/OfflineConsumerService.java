@@ -10,7 +10,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.function.Consumer;
 
 /**
@@ -48,7 +47,6 @@ public class OfflineConsumerService {
      * @return a new {@link Consumer} with the processor behavior
      */
     @Bean
-    @Transactional
     public Consumer<PaymentDTO> offlinePayment() {
         return offlinePaymentDTO -> {
 
@@ -62,7 +60,7 @@ public class OfflineConsumerService {
             relatedAccount.ifPresent(account -> {
 
                 // mapping the received payment dto into domain model
-                final var payment = offlinePaymentDTO.map();
+                final var payment = offlinePaymentDTO.map(account);
 
                 // if the payment is valid, we update
                 final var persistedAccount = accountService.addNewPayments(account, payment);

@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.function.Consumer;
 
 /**
@@ -41,7 +40,6 @@ public class OnlineConsumerService {
     }
 
     @Bean
-    @Transactional
     public Consumer<PaymentDTO> onlinePayment() {
         return onlinePaymentDTO -> {
 
@@ -53,7 +51,7 @@ public class OnlineConsumerService {
 
             // if the account is present, we will try to update its payments
             relatedAccount.ifPresent(account -> {
-                final var payment = onlinePaymentDTO.map();
+                final var payment = onlinePaymentDTO.map(account);
 
                 // if the payment is valid, we update
                 if(Boolean.TRUE.equals(payment.isValid()))

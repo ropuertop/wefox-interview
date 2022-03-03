@@ -3,6 +3,7 @@ package com.wefox.payment.processor.external.db.repository.entities;
 import com.wefox.payment.processor.core.model.Account;
 import com.wefox.payment.processor.external.db.utils.IDBMapper;
 import lombok.*;
+import lombok.experimental.Accessors;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
@@ -16,8 +17,9 @@ import java.util.stream.Collectors;
 @Setter
 @Entity
 @ToString
-@Table(name = "accounts", schema = "public")
 @NoArgsConstructor
+@Accessors(fluent = true, chain = true)
+@Table(name = "accounts", schema = "public")
 public class AccountEntity implements IDBMapper<Account> {
 
     @Id
@@ -66,12 +68,12 @@ public class AccountEntity implements IDBMapper<Account> {
 
         var newAccount = new AccountEntity();
 
-        newAccount.setAccountId(domainModel.getId().intValue());
-        newAccount.setName(domainModel.getName());
-        newAccount.setBirthdate(domainModel.getBirthDate());
-        newAccount.setCreatedAt(domainModel.getCreatedAt());
-        newAccount.setLastPaymentDate(domainModel.findLastPaymentDate().orElse(null));
-        newAccount.setEmail(domainModel.getEmail());
+        newAccount.accountId(domainModel.getId().intValue());
+        newAccount.name(domainModel.getName());
+        newAccount.birthdate(domainModel.getBirthDate());
+        newAccount.createdAt(domainModel.getCreatedAt());
+        newAccount.lastPaymentDate(domainModel.findLastPaymentDate().orElse(null));
+        newAccount.email(domainModel.getEmail());
 
         return newAccount;
     }
