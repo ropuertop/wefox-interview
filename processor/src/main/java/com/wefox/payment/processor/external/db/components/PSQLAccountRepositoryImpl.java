@@ -40,13 +40,13 @@ public class PSQLAccountRepositoryImpl implements IAccountRepository {
 
     @Override
     public final Optional<Account> findById(final Integer accountId) {
-        log.info("(PSQLAccountRepositoryImpl) -> (findById): finding the account related with [{}]", accountId);
+        log.debug("(PSQLAccountRepositoryImpl) -> (findById): finding the account related with [{}]", accountId);
         return this.accountDAO.findById(accountId).map(AccountEntity::map).filter(Account::isValid);
     }
 
     @Override
     public final Account save(final Account account) {
-        log.info("(PSQLAccountRepositoryImpl) -> (save): saving the account related with [{}] with the payments [{}]", account.getId(), account.getPayments().stream().map(Payment::getId));
+        log.debug("(PSQLAccountRepositoryImpl) -> (save): saving the account related with [{}] with the payments [{}]", account.getId(), account.getPayments().stream().map(Payment::getId));
 
         // saving the updated account
         final var persistedAccount = this.accountDAO.save(AccountEntity.map(account));

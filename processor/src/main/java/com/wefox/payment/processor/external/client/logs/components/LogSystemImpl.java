@@ -23,11 +23,11 @@ public class LogSystemImpl implements ILogSystem {
     }
 
     @Override
-    public final Optional<LocalDateTime> registerErrorLog(Payment payment, LogErrorType errorType, String errorMessage) {
+    public final Optional<LocalDateTime> registerErrorLog(String paymentId, LogErrorType errorType, String errorMessage) {
 
         // building the request dto
         final var requestErrorDTO = ErrorModelDTORequest.builder()
-                .paymentId(payment.getId().toString())
+                .paymentId(paymentId.toString())
                 .errorText(errorType.name().toLowerCase())
                 .errorDescription(errorMessage)
                 .build();
@@ -35,7 +35,7 @@ public class LogSystemImpl implements ILogSystem {
         try {
             return Optional.ofNullable(logSystemConnection.registerNewError(requestErrorDTO)).map(ErrorModelDTOResponse::getCreatedAt);
         } catch (IOException | URISyntaxException e) {
-            log.error("(LogSystemImpl) -> (registerErrorLog): there was a problem [{}] trying to register the error [{}] associated with [{}]", e.getLocalizedMessage(), errorType, payment.getId());
+            log.error("(LogSystemImpl) -> (registerErrorLog): there was a problem [{}] trying to register the error [{}] associated with [{}]", e, errorType, paymentId);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
             log.fatal("(LogSystemImpl) -> (registerErrorLog): The thread [{}] was interrupted", Thread.currentThread().getName());

@@ -16,5 +16,5 @@ public interface ILogSystem {
      * @param errorMessage a description related with the error
      * @return a new {@link ErrorModelDTOResponse} provided by the log system
      */
-    Optional<LocalDateTime> registerErrorLog(final Payment payment, final LogErrorType errorType, final String errorMessage);
+    Optional<LocalDateTime> registerErrorLog(final String paymentId, final LogErrorType errorType, final String errorMessage);
 }

@@ -1,5 +1,6 @@
 package com.wefox.payment.processor.events.functions;
 
+import com.wefox.payment.processor.events.IPaymentProcessor;
 import com.wefox.payment.processor.events.model.PaymentDTO;
 import com.wefox.payment.processor.core.service.IAccountService;
 import com.wefox.payment.processor.core.service.components.OfflineAccountServiceImpl;
@@ -19,15 +20,10 @@ import java.util.function.Consumer;
  */
 @Log4j2
 @Service
-@DependsOn("processor/offline/service")
+@DependsOn("processor/offline")
 public class OfflineConsumerService {
 
-    /**
-     * The {@link IAccountService} implementation
-     *
-     * @see OfflineAccountServiceImpl
-     */
-    private final IAccountService accountService;
+    private final IPaymentProcessor paymentProcessor;
 
     /**
      * Parameterized constructor with the current {@link IAccountService} bean implementation
@@ -36,9 +32,9 @@ public class OfflineConsumerService {
      */
     @Autowired
     public OfflineConsumerService(
-            @Qualifier("processor/offline/service") final IAccountService accountService
+            @Qualifier("processor/offline") final IPaymentProcessor paymentProcessor
     ) {
-        this.accountService = accountService;
+        this.paymentProcessor = paymentProcessor;
     }
 
     /**
@@ -48,25 +44,6 @@ public class OfflineConsumerService {
      */
     @Bean
     public Consumer<PaymentDTO> offlinePayment() {
-        return offlinePaymentDTO -> {
-
-            log.info("(offline) -> consuming the [{}] payment", offlinePaymentDTO.getPaymentId());
-
-            // finding the related payment account
-            final var relatedAccount =  accountService
-                    .getAccount(offlinePaymentDTO.getAccountId());
-
-            // if the account is present, we will try to update its payments
-            relatedAccount.ifPresent(account -> {
-
-                // mapping the received payment dto into domain model
-                final var payment = offlinePaymentDTO.map(account);
-
-                // if the payment is valid, we update
-                final var persistedAccount = accountService.addNewPayments(account, payment);
-
-                log.info("(offline) -> consumed the [{}] payment: [{}]", offlinePaymentDTO.getPaymentId(), persistedAccount);
-            });
-        };
+        return this.paymentProcessor::processPayment;
     }
 }

@@ -1,4 +1,4 @@
-package com.wefox.payment.processor.external.client.verificator.model;
+package com.wefox.payment.processor.external.client.verification.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.wefox.payment.processor.core.model.Payment;

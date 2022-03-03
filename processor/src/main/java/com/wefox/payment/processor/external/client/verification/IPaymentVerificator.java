@@ -1,6 +1,9 @@
-package com.wefox.payment.processor.external.client.verificator;
+package com.wefox.payment.processor.external.client.verification;
 
 import com.wefox.payment.processor.core.model.Payment;
+
+import java.io.IOException;
+import java.net.URISyntaxException;
 
 /**
  * This interface will provide a functionality definition of third party verificators

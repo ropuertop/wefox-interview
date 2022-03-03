@@ -1,6 +1,6 @@
-package com.wefox.payment.processor.external.client.verificator.connection;
+package com.wefox.payment.processor.external.client.verification.connection;
 
-import com.wefox.payment.processor.external.client.verificator.model.PaymentDTO;
+import com.wefox.payment.processor.external.client.verification.model.PaymentDTO;
 
 import java.io.IOException;
 import java.net.URISyntaxException;

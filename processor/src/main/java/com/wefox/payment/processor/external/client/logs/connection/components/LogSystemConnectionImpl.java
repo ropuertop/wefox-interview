@@ -1,6 +1,7 @@
 package com.wefox.payment.processor.external.client.logs.connection.components;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.wefox.payment.processor.external.client.logs.connection.ILogSystemConnection;
 import com.wefox.payment.processor.external.client.logs.model.request.ErrorModelDTORequest;
 import com.wefox.payment.processor.external.client.logs.model.response.ErrorModelDTOResponse;
@@ -19,7 +20,9 @@ import java.util.Optional;
 @Log4j2
 public class LogSystemConnectionImpl implements ILogSystemConnection {
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper = new ObjectMapper()
+            .registerModule(new JavaTimeModule());
+
     private final HttpClient client = HttpClient.newBuilder()
             .connectTimeout(Duration.of(5, ChronoUnit.SECONDS))
             .build();
@@ -32,7 +35,7 @@ public class LogSystemConnectionImpl implements ILogSystemConnection {
                 .writeValueAsString(requestDTO);
 
         // creating the request
-        final var logSystemUrl = "http://localhost:9000/logs";
+        final var logSystemUrl = "http://localhost:9000/log";
 
         final var request = HttpRequest
                 .newBuilder(new URI(logSystemUrl))

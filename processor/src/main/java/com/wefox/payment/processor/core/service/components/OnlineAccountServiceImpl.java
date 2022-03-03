@@ -3,7 +3,7 @@ package com.wefox.payment.processor.core.service.components;
 import com.wefox.payment.processor.core.model.Account;
 import com.wefox.payment.processor.core.model.Payment;
 import com.wefox.payment.processor.core.service.IAccountService;
-import com.wefox.payment.processor.external.client.verificator.IPaymentVerificator;
+import com.wefox.payment.processor.external.client.verification.IPaymentVerificator;
 import com.wefox.payment.processor.external.db.IAccountRepository;
 
 import java.util.Arrays;

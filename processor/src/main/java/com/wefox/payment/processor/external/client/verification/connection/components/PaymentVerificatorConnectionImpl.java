@@ -1,9 +1,9 @@
-package com.wefox.payment.processor.external.client.verificator.connection.components;
+package com.wefox.payment.processor.external.client.verification.connection.components;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.wefox.payment.processor.core.model.Payment;
-import com.wefox.payment.processor.external.client.verificator.connection.IPaymentVerificatorConnection;
-import com.wefox.payment.processor.external.client.verificator.model.PaymentDTO;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.wefox.payment.processor.external.client.verification.connection.IPaymentVerificatorConnection;
+import com.wefox.payment.processor.external.client.verification.model.PaymentDTO;
 
 import java.io.IOException;
 import java.net.URI;
@@ -16,7 +16,9 @@ import java.time.temporal.ChronoUnit;
 
 public class PaymentVerificatorConnectionImpl implements IPaymentVerificatorConnection {
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper = new ObjectMapper()
+            .registerModule(new JavaTimeModule());
+
     private final HttpClient client = HttpClient.newBuilder()
             .connectTimeout(Duration.of(5, ChronoUnit.SECONDS))
             .build();

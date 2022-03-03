@@ -1,16 +1,16 @@
-package com.wefox.payment.processor.external.client.verificator.components;
+package com.wefox.payment.processor.external.client.verification.components;
 
+import com.wefox.payment.processor.core.exceptions.GlobalProcessorException;
 import com.wefox.payment.processor.core.model.Payment;
 import com.wefox.payment.processor.external.client.logs.ILogSystem;
 import com.wefox.payment.processor.external.client.logs.utils.LogErrorType;
-import com.wefox.payment.processor.external.client.verificator.IPaymentVerificator;
-import com.wefox.payment.processor.external.client.verificator.connection.IPaymentVerificatorConnection;
-import com.wefox.payment.processor.external.client.verificator.model.PaymentDTO;
+import com.wefox.payment.processor.external.client.verification.IPaymentVerificator;
+import com.wefox.payment.processor.external.client.verification.connection.IPaymentVerificatorConnection;
+import com.wefox.payment.processor.external.client.verification.model.PaymentDTO;
 import lombok.extern.log4j.Log4j2;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.net.http.HttpTimeoutException;
 
 @Log4j2
 public class PaymentVerificatorImpl implements IPaymentVerificator {
@@ -28,19 +28,13 @@ public class PaymentVerificatorImpl implements IPaymentVerificator {
         try
         {
             return this.paymentVerificatorConnection.checkIfValid(PaymentDTO.map(payment));
-
-        }catch (HttpTimeoutException e) {
+        }catch (URISyntaxException | IOException e) {
             log.error("(PaymentVerificatorImpl) -> (validatePayment): There was a timeout for the payment [{}]", payment.getId());
-            logSystem.registerErrorLog(payment, LogErrorType.NETWORK, e.getMessage());
-            return false;
-        } catch (URISyntaxException | IOException e) {
-            logSystem.registerErrorLog(payment, LogErrorType.NETWORK, e.getMessage());
-            return false;
+            throw new GlobalProcessorException(LogErrorType.NETWORK, e.getMessage(), payment.getId().toString());
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
             log.fatal("(PaymentVerificatorImpl) -> (validatePayment): The thread [{}] was interrupted", Thread.currentThread().getName());
-            logSystem.registerErrorLog(payment, LogErrorType.OTHER, e.getMessage());
-            return false;
+            throw new GlobalProcessorException(LogErrorType.OTHER, e.getMessage(), payment.getId().toString());
         }
     }
 }
