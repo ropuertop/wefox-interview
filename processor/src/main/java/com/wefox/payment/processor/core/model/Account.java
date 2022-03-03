@@ -9,7 +9,6 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Positive;
-import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.*;
 import com.wefox.payment.processor.ProcessorApplication;

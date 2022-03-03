@@ -27,7 +27,7 @@ public class LogSystemImpl implements ILogSystem {
 
         // building the request dto
         final var requestErrorDTO = ErrorModelDTORequest.builder()
-                .paymentId(paymentId.toString())
+                .paymentId(paymentId)
                 .errorText(errorType.name().toLowerCase())
                 .errorDescription(errorMessage)
                 .build();

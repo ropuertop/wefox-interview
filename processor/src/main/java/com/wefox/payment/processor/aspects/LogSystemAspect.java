@@ -4,6 +4,7 @@ import com.wefox.payment.processor.core.exceptions.GlobalProcessorException;
 import com.wefox.payment.processor.events.model.PaymentDTO;
 import com.wefox.payment.processor.external.client.logs.ILogSystem;
 import com.wefox.payment.processor.external.client.logs.utils.LogErrorType;
+import com.wefox.payment.processor.external.db.IAccountRepository;
 import lombok.extern.log4j.Log4j2;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
@@ -12,13 +13,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Service;
 import java.util.Arrays;
+import com.wefox.payment.processor.external.client.logs.components.LogSystemImpl;
 
+/**
+ * This aspect is in charge of providing the logic to register every exception thrown
+ * on the {@link ILogSystem}.
+ *
+ * @author ropuertop
+ */
 @Log4j2
 @Aspect
 @Service
 @EnableAspectJAutoProxy
 public class LogSystemAspect {
 
+    /**
+     * The {@link ILogSystem} implementation
+     *
+     * @see LogSystemImpl
+     */
     private final ILogSystem logSystem;
 
     @Autowired

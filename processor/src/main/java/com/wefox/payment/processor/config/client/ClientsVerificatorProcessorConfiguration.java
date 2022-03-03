@@ -22,9 +22,8 @@ public class ClientsVerificatorProcessorConfiguration {
 
     @Bean("processor/external/client/verification")
     public IPaymentVerificator paymentVerificator(
-            @Qualifier("processor/external/client/verification/connection") final IPaymentVerificatorConnection paymentVerificatorConnection,
-            @Qualifier("processor/external/client/logs") final ILogSystem logSystem
+            @Qualifier("processor/external/client/verification/connection") final IPaymentVerificatorConnection paymentVerificatorConnection
     ) {
-        return new PaymentVerificatorImpl(paymentVerificatorConnection, logSystem);
+        return new PaymentVerificatorImpl(paymentVerificatorConnection);
     }
 }

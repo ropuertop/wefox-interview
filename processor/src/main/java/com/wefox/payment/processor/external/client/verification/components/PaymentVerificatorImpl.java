@@ -16,11 +16,9 @@ import java.net.URISyntaxException;
 public class PaymentVerificatorImpl implements IPaymentVerificator {
 
     private final IPaymentVerificatorConnection paymentVerificatorConnection;
-    private final ILogSystem logSystem;
 
-    public PaymentVerificatorImpl(IPaymentVerificatorConnection paymentVerificatorConnection, ILogSystem logSystem) {
+    public PaymentVerificatorImpl(final IPaymentVerificatorConnection paymentVerificatorConnection) {
         this.paymentVerificatorConnection = paymentVerificatorConnection;
-        this.logSystem = logSystem;
     }
 
     @Override
