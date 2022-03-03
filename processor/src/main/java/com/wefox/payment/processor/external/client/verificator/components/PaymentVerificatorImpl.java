@@ -1,4 +1,4 @@
-package com.wefox.payment.processor.external.client.verificator.impl;
+package com.wefox.payment.processor.external.client.verificator.components;
 
 import com.wefox.payment.processor.core.model.Payment;
 import com.wefox.payment.processor.external.client.verificator.IPaymentVerificator;

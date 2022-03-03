@@ -1,9 +1,9 @@
 package com.wefox.payment.processor.config.db;
 
 import com.wefox.payment.processor.external.db.IAccountRepository;
-import com.wefox.payment.processor.external.db.dao.AccountDAO;
-import com.wefox.payment.processor.external.db.dao.PaymentDAO;
-import com.wefox.payment.processor.external.db.impl.PSQLAccountRepositoryImpl;
+import com.wefox.payment.processor.external.db.repository.dao.AccountDAO;
+import com.wefox.payment.processor.external.db.repository.dao.PaymentDAO;
+import com.wefox.payment.processor.external.db.components.PSQLAccountRepositoryImpl;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

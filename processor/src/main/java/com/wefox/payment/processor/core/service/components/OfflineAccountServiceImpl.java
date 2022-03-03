@@ -1,14 +1,11 @@
-package com.wefox.payment.processor.core.service.impl;
+package com.wefox.payment.processor.core.service.components;
 
 import com.wefox.payment.processor.external.db.IAccountRepository;
 import com.wefox.payment.processor.core.model.Account;
 import com.wefox.payment.processor.core.model.Payment;
 import com.wefox.payment.processor.core.service.IAccountService;
-import org.springframework.cache.annotation.CacheConfig;
-
-import javax.transaction.Transactional;
 import java.util.Optional;
-import com.wefox.payment.processor.external.db.impl.PSQLAccountRepositoryImpl;
+import com.wefox.payment.processor.external.db.components.PSQLAccountRepositoryImpl;
 
 /**
  * This class is in charge of defining the {@link IAccountService} for the offline

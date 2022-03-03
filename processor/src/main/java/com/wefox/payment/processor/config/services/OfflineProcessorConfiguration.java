@@ -1,8 +1,7 @@
 package com.wefox.payment.processor.config.services;
 
-import com.wefox.payment.processor.api.functions.OfflineConsumerService;
 import com.wefox.payment.processor.core.service.IAccountService;
-import com.wefox.payment.processor.core.service.impl.OfflineAccountServiceImpl;
+import com.wefox.payment.processor.core.service.components.OfflineAccountServiceImpl;
 import com.wefox.payment.processor.external.db.IAccountRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;

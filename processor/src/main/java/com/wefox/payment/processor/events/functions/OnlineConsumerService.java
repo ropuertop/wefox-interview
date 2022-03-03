@@ -1,14 +1,11 @@
-package com.wefox.payment.processor.api.functions;
+package com.wefox.payment.processor.events.functions;
 
-import com.wefox.payment.processor.api.model.PaymentDTO;
-import com.wefox.payment.processor.core.model.Account;
+import com.wefox.payment.processor.events.model.PaymentDTO;
 import com.wefox.payment.processor.core.service.IAccountService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +25,7 @@ public class OnlineConsumerService {
     /**
      * The {@link IAccountService} implementation
      *
-     * @see com.wefox.payment.processor.core.service.impl.OnlineAccountServiceImpl
+     * @see com.wefox.payment.processor.core.service.components.OnlineAccountServiceImpl
      */
     private final IAccountService accountService;
 

@@ -1,7 +1,7 @@
 package com.wefox.payment.processor.config.client;
 
 import com.wefox.payment.processor.external.client.verificator.IPaymentVerificator;
-import com.wefox.payment.processor.external.client.verificator.impl.PaymentVerificatorImpl;
+import com.wefox.payment.processor.external.client.verificator.components.PaymentVerificatorImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

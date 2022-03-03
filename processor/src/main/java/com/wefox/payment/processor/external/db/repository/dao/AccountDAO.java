@@ -1,6 +1,6 @@
-package com.wefox.payment.processor.external.db.dao;
+package com.wefox.payment.processor.external.db.repository.dao;
 
-import com.wefox.payment.processor.external.db.entities.AccountEntity;
+import com.wefox.payment.processor.external.db.repository.entities.AccountEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

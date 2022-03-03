@@ -1,4 +1,4 @@
-package com.wefox.payment.processor.external.db.entities;
+package com.wefox.payment.processor.external.db.repository.entities;
 
 import com.wefox.payment.processor.core.model.Payment;
 import com.wefox.payment.processor.core.utils.enums.PaymentType;

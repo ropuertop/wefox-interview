@@ -1,9 +1,8 @@
-package com.wefox.payment.processor.api.functions;
+package com.wefox.payment.processor.events.functions;
 
-import com.wefox.payment.processor.api.model.PaymentDTO;
-import com.wefox.payment.processor.core.model.Account;
+import com.wefox.payment.processor.events.model.PaymentDTO;
 import com.wefox.payment.processor.core.service.IAccountService;
-import com.wefox.payment.processor.core.service.impl.OfflineAccountServiceImpl;
+import com.wefox.payment.processor.core.service.components.OfflineAccountServiceImpl;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

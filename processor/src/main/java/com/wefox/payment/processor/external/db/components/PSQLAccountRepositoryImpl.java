@@ -1,16 +1,16 @@
-package com.wefox.payment.processor.external.db.impl;
+package com.wefox.payment.processor.external.db.components;
 
 import com.wefox.payment.processor.core.model.Account;
 import com.wefox.payment.processor.core.model.Payment;
 import com.wefox.payment.processor.external.db.IAccountRepository;
-import com.wefox.payment.processor.external.db.dao.AccountDAO;
-import com.wefox.payment.processor.external.db.dao.PaymentDAO;
-import com.wefox.payment.processor.external.db.entities.AccountEntity;
+import com.wefox.payment.processor.external.db.repository.dao.AccountDAO;
+import com.wefox.payment.processor.external.db.repository.dao.PaymentDAO;
+import com.wefox.payment.processor.external.db.repository.entities.AccountEntity;
 
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import com.wefox.payment.processor.external.db.entities.PaymentEntity;
+import com.wefox.payment.processor.external.db.repository.entities.PaymentEntity;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.jpa.repository.JpaRepository;
 

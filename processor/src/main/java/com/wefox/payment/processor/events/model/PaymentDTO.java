@@ -1,7 +1,6 @@
-package com.wefox.payment.processor.api.model;
+package com.wefox.payment.processor.events.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.wefox.payment.processor.core.model.Account;
 import com.wefox.payment.processor.core.model.Payment;
 import com.wefox.payment.processor.core.utils.enums.PaymentType;
 import lombok.AllArgsConstructor;
@@ -11,7 +10,6 @@ import lombok.extern.jackson.Jacksonized;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Locale;
 import java.util.UUID;
 
 @Getter

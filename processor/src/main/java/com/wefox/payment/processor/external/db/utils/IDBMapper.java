@@ -1,7 +1,7 @@
 package com.wefox.payment.processor.external.db.utils;
 
 import com.wefox.payment.processor.core.model.global.AbstractProcessorDomainModel;
-import com.wefox.payment.processor.external.db.entities.AccountEntity;
+import com.wefox.payment.processor.external.db.repository.entities.AccountEntity;
 
 /**
  * This interface will provide a method declaration for mapping every entity into the related
