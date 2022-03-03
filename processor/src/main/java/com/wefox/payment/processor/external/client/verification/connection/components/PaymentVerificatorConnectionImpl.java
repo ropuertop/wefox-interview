@@ -16,12 +16,16 @@ import java.time.temporal.ChronoUnit;
 
 public class PaymentVerificatorConnectionImpl implements IPaymentVerificatorConnection {
 
-    private final ObjectMapper objectMapper = new ObjectMapper()
-            .registerModule(new JavaTimeModule());
+    private final ObjectMapper objectMapper;
 
-    private final HttpClient client = HttpClient.newBuilder()
-            .connectTimeout(Duration.of(5, ChronoUnit.SECONDS))
-            .build();
+    private final HttpClient client;
+
+    public PaymentVerificatorConnectionImpl() {
+        this.objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
+        this.client = HttpClient.newBuilder()
+                .connectTimeout(Duration.of(5, ChronoUnit.SECONDS))
+                .build();
+    }
 
     @Override
     public final Boolean checkIfValid(final PaymentDTO payment) throws URISyntaxException, IOException, InterruptedException {
@@ -38,7 +42,7 @@ public class PaymentVerificatorConnectionImpl implements IPaymentVerificatorConn
                 .POST(HttpRequest.BodyPublishers.ofString(requestBody))
                 .header("Content-Type", "application/json")
                 .version(HttpClient.Version.HTTP_1_1)
-                .timeout(Duration.of(5, ChronoUnit.SECONDS))
+                .timeout(Duration.of(10, ChronoUnit.SECONDS))
                 .build();
 
         // sending the request

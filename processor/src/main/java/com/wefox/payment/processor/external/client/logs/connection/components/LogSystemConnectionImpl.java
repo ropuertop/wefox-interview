@@ -20,12 +20,16 @@ import java.util.Optional;
 @Log4j2
 public class LogSystemConnectionImpl implements ILogSystemConnection {
 
-    private final ObjectMapper objectMapper = new ObjectMapper()
-            .registerModule(new JavaTimeModule());
+    private final ObjectMapper objectMapper;
+    private final HttpClient client;
 
-    private final HttpClient client = HttpClient.newBuilder()
-            .connectTimeout(Duration.of(5, ChronoUnit.SECONDS))
-            .build();
+    public LogSystemConnectionImpl()
+    {
+        this.objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
+        this.client = HttpClient.newBuilder()
+                .connectTimeout(Duration.of(5, ChronoUnit.SECONDS))
+                .build();
+    }
 
     @Override
     public ErrorModelDTOResponse registerNewError(final ErrorModelDTORequest requestDTO) throws IOException, URISyntaxException, InterruptedException {
@@ -59,7 +63,6 @@ public class LogSystemConnectionImpl implements ILogSystemConnection {
         else
         {
             log.error("(LogSystemConnectionImpl) -> (registerNewError): there was an problem trying to register a new error: [{}]", response);
-            // we could return the default behavior, we only need to define what we want to do on yellow paths
             return null;
         }
     }

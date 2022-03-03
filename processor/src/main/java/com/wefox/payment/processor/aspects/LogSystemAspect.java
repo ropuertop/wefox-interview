@@ -37,17 +37,19 @@ public class LogSystemAspect {
 
         if(ex.getClass() == GlobalProcessorException.class)
         {
+
             // casting the exception received
             final var verificationClientException = ((GlobalProcessorException) ex);
 
             // registering the new error log
-            final var optErrorCreationDate = this.logSystem.registerErrorLog(
+            final var optCreatedAt = this.logSystem.registerErrorLog(
                     verificationClientException.getPaymentId(),
                     verificationClientException.getCode(),
                     verificationClientException.getMessage()
             );
 
-            log.info("NEW LOG [{}]", optErrorCreationDate);
+            optCreatedAt.ifPresentOrElse(createdAt -> log.warn("(LogSystemAspect) -> (processException): registering new error associated to [{}]", verificationClientException.getPaymentId()),
+                    () -> log.fatal("(LogSystemAspect) -> (processException): could not register the error associated to [{}]", verificationClientException.getPaymentId()));
 
             return;
         }
@@ -72,11 +74,13 @@ public class LogSystemAspect {
                 .findAny();
 
         // registering a new error log in log system
-        this.logSystem.registerErrorLog(
+        final var optCreatedAt = this.logSystem.registerErrorLog(
                 optPaymentId.orElse(null),
                 LogErrorType.OTHER,
                 String.format("There was an unexpected error processing the payment: %s", ex.getLocalizedMessage())
         );
 
+        optCreatedAt.ifPresentOrElse(createdAt -> log.warn("(LogSystemAspect) -> (processException): registering new error associated to [{}]", optPaymentId.orElse(null)),
+                () -> log.fatal("(LogSystemAspect) -> (processException): could not register the error associated to [{}]", optPaymentId.orElse(null)));
     }
 }

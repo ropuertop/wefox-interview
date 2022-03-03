@@ -51,5 +51,7 @@ public class OnlinePaymentProcessorImpl implements IPaymentProcessor {
 
         });
 
+        log.info("(online) -> consumed the [{}] payment", onlinePaymentDTO.getPaymentId());
+
     }
 }
