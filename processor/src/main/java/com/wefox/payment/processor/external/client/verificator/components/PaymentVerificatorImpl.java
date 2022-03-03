@@ -1,6 +1,8 @@
 package com.wefox.payment.processor.external.client.verificator.components;
 
 import com.wefox.payment.processor.core.model.Payment;
+import com.wefox.payment.processor.external.client.logs.ILogSystem;
+import com.wefox.payment.processor.external.client.logs.utils.LogErrorType;
 import com.wefox.payment.processor.external.client.verificator.IPaymentVerificator;
 import com.wefox.payment.processor.external.client.verificator.connection.IPaymentVerificatorConnection;
 import com.wefox.payment.processor.external.client.verificator.model.PaymentDTO;
@@ -14,9 +16,11 @@ import java.net.http.HttpTimeoutException;
 public class PaymentVerificatorImpl implements IPaymentVerificator {
 
     private final IPaymentVerificatorConnection paymentVerificatorConnection;
+    private final ILogSystem logSystem;
 
-    public PaymentVerificatorImpl(IPaymentVerificatorConnection paymentVerificatorConnection) {
+    public PaymentVerificatorImpl(IPaymentVerificatorConnection paymentVerificatorConnection, ILogSystem logSystem) {
         this.paymentVerificatorConnection = paymentVerificatorConnection;
+        this.logSystem = logSystem;
     }
 
     @Override
@@ -27,15 +31,16 @@ public class PaymentVerificatorImpl implements IPaymentVerificator {
 
         }catch (HttpTimeoutException e) {
             log.error("(PaymentVerificatorImpl) -> (validatePayment): There was a timeout for the payment [{}]", payment.getId());
-            return false; // TODO: create log
+            logSystem.registerErrorLog(payment, LogErrorType.NETWORK, e.getMessage());
+            return false;
         } catch (URISyntaxException | IOException e) {
-            e.printStackTrace();
-            return false; // TODO: create log
+            logSystem.registerErrorLog(payment, LogErrorType.NETWORK, e.getMessage());
+            return false;
         } catch (InterruptedException e) {
-            e.printStackTrace();
-            final var status = Thread.interrupted();
-            log.warn("(PaymentVerificatorImpl) -> (validatePayment): The thread [{}] has been interrupted? [{}]", Thread.currentThread().getName(), status);
-            return false; // TODO: create log
+            Thread.currentThread().interrupt();
+            log.fatal("(PaymentVerificatorImpl) -> (validatePayment): The thread [{}] was interrupted", Thread.currentThread().getName());
+            logSystem.registerErrorLog(payment, LogErrorType.OTHER, e.getMessage());
+            return false;
         }
     }
 }
