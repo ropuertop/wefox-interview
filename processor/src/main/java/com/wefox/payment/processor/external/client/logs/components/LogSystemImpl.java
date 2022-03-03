@@ -4,6 +4,7 @@ import com.wefox.payment.processor.core.model.Payment;
 import com.wefox.payment.processor.external.client.logs.ILogSystem;
 import com.wefox.payment.processor.external.client.logs.connection.ILogSystemConnection;
 import com.wefox.payment.processor.external.client.logs.model.request.ErrorModelDTORequest;
+import com.wefox.payment.processor.external.client.logs.model.response.ErrorModelDTOResponse;
 import com.wefox.payment.processor.external.client.logs.utils.LogErrorType;
 import lombok.extern.log4j.Log4j2;
 
@@ -32,10 +33,7 @@ public class LogSystemImpl implements ILogSystem {
                 .build();
 
         try {
-
-            final var response = logSystemConnection.registerNewError(requestErrorDTO);
-            return Optional.of(response.getCreatedAt());
-
+            return Optional.ofNullable(logSystemConnection.registerNewError(requestErrorDTO)).map(ErrorModelDTOResponse::getCreatedAt);
         } catch (IOException | URISyntaxException e) {
             log.error("(LogSystemImpl) -> (registerErrorLog): there was a problem [{}] trying to register the error [{}] associated with [{}]", e.getLocalizedMessage(), errorType, payment.getId());
         } catch (InterruptedException e) {
