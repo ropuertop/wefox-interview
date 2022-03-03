@@ -84,7 +84,7 @@ public class LogSystemAspect {
     {
         // getting the optional payment identifier
         final var optPaymentId = Arrays.stream(jp.getArgs())
-                .filter(arg -> arg.getClass().isAssignableFrom(PaymentDTO.class))
+                .filter(arg -> arg.getClass() == PaymentDTO.class)
                 .map(payment -> ((PaymentDTO) payment).getPaymentId())
                 .findAny();
 
