@@ -45,7 +45,7 @@ public class OfflinePaymentProcessorImpl implements IPaymentProcessor {
             // if the payment is valid, we update
             final var persistedAccount = accountService.addNewPayments(account, payment);
 
-            log.info("(offline) -> consumed the [{}] payment: [{}]", offlinePaymentDTO.getPaymentId(), persistedAccount);
+            log.info("(offline) -> consumed the [{}] payment: [{}]", offlinePaymentDTO.getPaymentId(), persistedAccount.getId());
         });
     }
 }

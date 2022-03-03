@@ -39,7 +39,7 @@ public class LogSystemConnectionImpl implements ILogSystemConnection {
                 .writeValueAsString(requestDTO);
 
         // creating the request
-        final var logSystemUrl = "http://localhost:9000/log";
+        final var logSystemUrl = "http://host.docker.internal:9000/log";
 
         final var request = HttpRequest
                 .newBuilder(new URI(logSystemUrl))
@@ -62,7 +62,7 @@ public class LogSystemConnectionImpl implements ILogSystemConnection {
         }
         else
         {
-            log.error("(LogSystemConnectionImpl) -> (registerNewError): there was an problem trying to register a new error: [{}]", response);
+            log.error("(LogSystemConnectionImpl) -> (registerNewError): there was a problem trying to register a new error: [{}]", response);
             return null;
         }
     }

@@ -1,6 +1,5 @@
 package com.wefox.payment.processor.config.client;
 
-import com.wefox.payment.processor.external.client.logs.ILogSystem;
 import com.wefox.payment.processor.external.client.verification.IPaymentVerificator;
 import com.wefox.payment.processor.external.client.verification.components.PaymentVerificatorImpl;
 import com.wefox.payment.processor.external.client.verification.connection.IPaymentVerificatorConnection;
