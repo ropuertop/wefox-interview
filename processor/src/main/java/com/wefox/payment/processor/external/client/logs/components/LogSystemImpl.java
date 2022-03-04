@@ -1,6 +1,5 @@
 package com.wefox.payment.processor.external.client.logs.components;
 
-import com.wefox.payment.processor.core.model.Payment;
 import com.wefox.payment.processor.external.client.logs.ILogSystem;
 import com.wefox.payment.processor.external.client.logs.connection.ILogSystemConnection;
 import com.wefox.payment.processor.external.client.logs.model.request.ErrorModelDTORequest;
@@ -23,7 +22,7 @@ public class LogSystemImpl implements ILogSystem {
     }
 
     @Override
-    public final Optional<LocalDateTime> registerErrorLog(String paymentId, LogErrorType errorType, String errorMessage) {
+    public final Optional<LocalDateTime> registerErrorLog(final String paymentId, final LogErrorType errorType, final String errorMessage) {
 
         // building the request dto
         final var requestErrorDTO = ErrorModelDTORequest.builder()

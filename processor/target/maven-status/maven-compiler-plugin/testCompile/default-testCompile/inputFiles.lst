@@ -1,1 +1,4 @@
-/Users/rorigoooo/wefox/interview/wefox-interview/processor/src/test/java/com/wefox/payment/processor/ProcessorApplicationTests.java
+/Users/rorigoooo/wefox/interview/wefox-interview/processor/src/test/java/com/wefox/payment/processor/core/service/components/OfflineAccountServiceImplTest.java
+/Users/rorigoooo/wefox/interview/wefox-interview/processor/src/test/java/com/wefox/payment/processor/events/components/PaymentProcessorImplTest.java
+/Users/rorigoooo/wefox/interview/wefox-interview/processor/src/test/java/com/wefox/payment/processor/core/service/components/OnlineAccountServiceImplTest.java
+/Users/rorigoooo/wefox/interview/wefox-interview/processor/src/test/java/com/wefox/payment/processor/external/db/components/JPAAccountRepositoryImplTest.java
