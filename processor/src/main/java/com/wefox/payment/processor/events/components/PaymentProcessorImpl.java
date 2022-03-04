@@ -30,7 +30,7 @@ public class PaymentProcessorImpl implements IPaymentProcessor {
     @LogSystem
     public void processPayment(final PaymentDTO offlinePaymentDTO) {
 
-        log.info("(offline) -> consuming the [{}] payment", offlinePaymentDTO.getPaymentId());
+        log.info("({}) -> consuming the [{}] payment", offlinePaymentDTO.getPaymentType(), offlinePaymentDTO.getPaymentId());
 
         // finding the related payment account
         final var relatedAccount = accountService
@@ -39,6 +39,6 @@ public class PaymentProcessorImpl implements IPaymentProcessor {
         // if the account is present, we will try to update its payments
         relatedAccount.ifPresent(account -> accountService.addNewPayments(account, offlinePaymentDTO.map(account)));
 
-        log.info("(offline) -> consuming the [{}] payment", offlinePaymentDTO.getPaymentId());
+        log.info("({}) -> consumed the [{}] payment", offlinePaymentDTO.getPaymentType(), offlinePaymentDTO.getPaymentId());
     }
 }
