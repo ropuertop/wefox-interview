@@ -4,8 +4,10 @@
 /Users/rorigoooo/wefox/interview/wefox-interview/processor/src/main/java/com/wefox/payment/processor/events/IPaymentProcessor.java
 /Users/rorigoooo/wefox/interview/wefox-interview/processor/src/main/java/com/wefox/payment/processor/config/services/OfflineProcessorConfiguration.java
 /Users/rorigoooo/wefox/interview/wefox-interview/processor/src/main/java/com/wefox/payment/processor/external/client/verification/connection/components/PaymentVerificatorConnectionImpl.java
+/Users/rorigoooo/wefox/interview/wefox-interview/processor/src/main/java/com/wefox/payment/processor/events/components/PaymentProcessorImpl.java
 /Users/rorigoooo/wefox/interview/wefox-interview/processor/src/main/java/com/wefox/payment/processor/core/model/Account.java
 /Users/rorigoooo/wefox/interview/wefox-interview/processor/src/main/java/com/wefox/payment/processor/core/service/components/OnlineAccountServiceImpl.java
+/Users/rorigoooo/wefox/interview/wefox-interview/processor/src/main/java/com/wefox/payment/processor/external/db/components/JPAAccountRepositoryImpl.java
 /Users/rorigoooo/wefox/interview/wefox-interview/processor/src/main/java/com/wefox/payment/processor/external/client/logs/connection/ILogSystemConnection.java
 /Users/rorigoooo/wefox/interview/wefox-interview/processor/src/main/java/com/wefox/payment/processor/external/client/logs/components/LogSystemImpl.java
 /Users/rorigoooo/wefox/interview/wefox-interview/processor/src/main/java/com/wefox/payment/processor/events/functions/OnlineConsumerService.java
@@ -18,7 +20,6 @@
 /Users/rorigoooo/wefox/interview/wefox-interview/processor/src/main/java/com/wefox/payment/processor/external/client/logs/model/request/ErrorModelDTORequest.java
 /Users/rorigoooo/wefox/interview/wefox-interview/processor/src/main/java/com/wefox/payment/processor/aspects/LogSystem.java
 /Users/rorigoooo/wefox/interview/wefox-interview/processor/src/main/java/com/wefox/payment/processor/core/utils/enums/PaymentType.java
-/Users/rorigoooo/wefox/interview/wefox-interview/processor/src/main/java/com/wefox/payment/processor/events/components/OfflinePaymentProcessorImpl.java
 /Users/rorigoooo/wefox/interview/wefox-interview/processor/src/main/java/com/wefox/payment/processor/config/services/OnlineProcessorConfiguration.java
 /Users/rorigoooo/wefox/interview/wefox-interview/processor/src/main/java/com/wefox/payment/processor/core/utils/functions/IValidator.java
 /Users/rorigoooo/wefox/interview/wefox-interview/processor/src/main/java/com/wefox/payment/processor/config/events/OnlinePaymentProcessor.java
@@ -29,16 +30,15 @@
 /Users/rorigoooo/wefox/interview/wefox-interview/processor/src/main/java/com/wefox/payment/processor/external/client/verification/IPaymentVerificator.java
 /Users/rorigoooo/wefox/interview/wefox-interview/processor/src/main/java/com/wefox/payment/processor/external/client/logs/connection/components/LogSystemConnectionImpl.java
 /Users/rorigoooo/wefox/interview/wefox-interview/processor/src/main/java/com/wefox/payment/processor/config/client/ClientLogSystemProcessorConfiguration.java
+/Users/rorigoooo/wefox/interview/wefox-interview/processor/src/main/java/com/wefox/payment/processor/core/service/components/AbstractAccountServiceImpl.java
 /Users/rorigoooo/wefox/interview/wefox-interview/processor/src/main/java/com/wefox/payment/processor/core/service/components/OfflineAccountServiceImpl.java
 /Users/rorigoooo/wefox/interview/wefox-interview/processor/src/main/java/com/wefox/payment/processor/events/model/PaymentDTO.java
 /Users/rorigoooo/wefox/interview/wefox-interview/processor/src/main/java/com/wefox/payment/processor/external/client/logs/model/response/ErrorModelDTOResponse.java
 /Users/rorigoooo/wefox/interview/wefox-interview/processor/src/main/java/com/wefox/payment/processor/aspects/LogSystemAspect.java
 /Users/rorigoooo/wefox/interview/wefox-interview/processor/src/main/java/com/wefox/payment/processor/external/db/repository/entities/AccountEntity.java
-/Users/rorigoooo/wefox/interview/wefox-interview/processor/src/main/java/com/wefox/payment/processor/external/db/components/PSQLAccountRepositoryImpl.java
 /Users/rorigoooo/wefox/interview/wefox-interview/processor/src/main/java/com/wefox/payment/processor/core/model/global/AbstractProcessorDomainModel.java
 /Users/rorigoooo/wefox/interview/wefox-interview/processor/src/main/java/com/wefox/payment/processor/ProcessorApplication.java
 /Users/rorigoooo/wefox/interview/wefox-interview/processor/src/main/java/com/wefox/payment/processor/core/exceptions/GlobalProcessorException.java
 /Users/rorigoooo/wefox/interview/wefox-interview/processor/src/main/java/com/wefox/payment/processor/core/model/Payment.java
 /Users/rorigoooo/wefox/interview/wefox-interview/processor/src/main/java/com/wefox/payment/processor/external/db/repository/entities/PaymentEntity.java
-/Users/rorigoooo/wefox/interview/wefox-interview/processor/src/main/java/com/wefox/payment/processor/events/components/OnlinePaymentProcessorImpl.java
 /Users/rorigoooo/wefox/interview/wefox-interview/processor/src/main/java/com/wefox/payment/processor/external/db/repository/dao/PaymentDAO.java

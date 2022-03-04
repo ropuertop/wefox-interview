@@ -30,7 +30,21 @@ If everything went well, you will see something like the following image in your
 
 ![image-20220303233139013](./assets/image-20220303233139013.png)
 
+> Only if you want, you can generate a new *processor.jar*. You only need to navigate into the processor folder (you need the **Maven Framework** with the **version 3.6.3**) and throw the following command (you will see every implemented tests):
+>
+> ```bash
+> mvn clean package
+> ```
+>
+> After it, you can execute the command:
+>
+> ```bash
+> docker build -t processor .
+> ```
+
 ------
+
+
 
 ## :memo: Technical Design
 

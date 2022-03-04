@@ -18,9 +18,9 @@ com/wefox/payment/processor/external/db/repository/dao/AccountDAO.class
 com/wefox/payment/processor/external/db/repository/entities/PaymentEntity.class
 com/wefox/payment/processor/external/db/utils/IDBMapper.class
 com/wefox/payment/processor/aspects/LogSystemAspect.class
+com/wefox/payment/processor/core/service/components/AbstractAccountServiceImpl.class
 com/wefox/payment/processor/config/events/OfflinePaymentProcessor.class
 com/wefox/payment/processor/external/db/IAccountRepository.class
-com/wefox/payment/processor/events/components/OnlinePaymentProcessorImpl.class
 com/wefox/payment/processor/events/functions/OfflineConsumerService.class
 com/wefox/payment/processor/external/db/repository/dao/PaymentDAO.class
 com/wefox/payment/processor/config/client/ClientLogSystemProcessorConfiguration.class
@@ -34,7 +34,6 @@ com/wefox/payment/processor/core/service/components/OfflineAccountServiceImpl.cl
 com/wefox/payment/processor/external/db/repository/entities/AccountEntity.class
 com/wefox/payment/processor/core/utils/functions/IValidator.class
 com/wefox/payment/processor/config/services/OfflineProcessorConfiguration.class
-com/wefox/payment/processor/events/components/OfflinePaymentProcessorImpl.class
 com/wefox/payment/processor/core/exceptions/GlobalProcessorException.class
 com/wefox/payment/processor/external/client/verification/model/PaymentDTO$PaymentDTOBuilder.class
 com/wefox/payment/processor/external/client/verification/components/PaymentVerificatorImpl.class
@@ -42,9 +41,10 @@ com/wefox/payment/processor/external/client/verification/model/PaymentDTO.class
 com/wefox/payment/processor/core/model/global/AbstractProcessorDomainModel.class
 com/wefox/payment/processor/aspects/LogSystem.class
 com/wefox/payment/processor/external/client/logs/connection/ILogSystemConnection.class
+com/wefox/payment/processor/external/db/components/JPAAccountRepositoryImpl.class
 com/wefox/payment/processor/events/model/PaymentDTO.class
 com/wefox/payment/processor/external/client/logs/model/request/ErrorModelDTORequest$ErrorModelDTORequestBuilder.class
 com/wefox/payment/processor/config/services/OnlineProcessorConfiguration.class
-com/wefox/payment/processor/external/db/components/PSQLAccountRepositoryImpl.class
+com/wefox/payment/processor/events/components/PaymentProcessorImpl.class
 com/wefox/payment/processor/external/client/logs/model/request/ErrorModelDTORequest.class
 com/wefox/payment/processor/ProcessorApplication.class

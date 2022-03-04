@@ -20,7 +20,7 @@ import com.wefox.payment.processor.ProcessorApplication;
  */
 @Getter
 @Builder
-public class Account extends AbstractProcessorDomainModel{
+public class Account extends AbstractProcessorDomainModel {
 
     @Positive
     private final Long id;

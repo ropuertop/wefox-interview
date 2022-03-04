@@ -1,11 +1,7 @@
 package com.wefox.payment.processor.core.service.components;
 
 import com.wefox.payment.processor.external.db.IAccountRepository;
-import com.wefox.payment.processor.core.model.Account;
-import com.wefox.payment.processor.core.model.Payment;
 import com.wefox.payment.processor.core.service.IAccountService;
-import java.util.Optional;
-import com.wefox.payment.processor.external.db.components.PSQLAccountRepositoryImpl;
 
 /**
  * This class is in charge of defining the {@link IAccountService} for the offline
@@ -13,14 +9,7 @@ import com.wefox.payment.processor.external.db.components.PSQLAccountRepositoryI
  *
  * @author ropuertop
  */
-public class OfflineAccountServiceImpl implements IAccountService {
-
-    /**
-     * The {@link IAccountRepository} implementation
-     *
-     * @see PSQLAccountRepositoryImpl
-     */
-    private final IAccountRepository accountRepository;
+public class OfflineAccountServiceImpl extends AbstractAccountServiceImpl {
 
     /**
      * Parameterized constructor with the bean injections associated to the {@link OfflineAccountServiceImpl}
@@ -28,21 +17,7 @@ public class OfflineAccountServiceImpl implements IAccountService {
      * @param accountRepository the current {@link IAccountRepository} bean implementation
      */
     public OfflineAccountServiceImpl(final IAccountRepository accountRepository) {
-        this.accountRepository = accountRepository;
+        super(accountRepository);
     }
 
-    @Override
-    public Account addNewPayments(Account account, final Payment... payments) {
-
-        // updating the account with the new received payments
-        account.addNewPayments(payments);
-
-        // storing and returning the updated account
-        return this.accountRepository.save(account);
-    }
-
-    @Override
-    public Optional<Account> getAccount(final Integer accountId) {
-        return this.accountRepository.findById(accountId);
-    }
 }

@@ -32,7 +32,7 @@ public class LogSystemConnectionImpl implements ILogSystemConnection {
     }
 
     @Override
-    public ErrorModelDTOResponse registerNewError(final ErrorModelDTORequest requestDTO) throws IOException, URISyntaxException, InterruptedException {
+    public final ErrorModelDTOResponse registerNewError(final ErrorModelDTORequest requestDTO) throws IOException, URISyntaxException, InterruptedException {
 
         final var requestBody = this.objectMapper
                 .writerWithDefaultPrettyPrinter()

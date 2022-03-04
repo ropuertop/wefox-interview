@@ -20,33 +20,37 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author ropuertop
  */
 @Log4j2
-public class PSQLAccountRepositoryImpl implements IAccountRepository {
+public class JPAAccountRepositoryImpl implements IAccountRepository {
 
     /**
      * The {@link AccountDAO} {@link JpaRepository} that will be injected.
      */
     private final AccountDAO accountDAO;
+
+    /**
+     * The {@link PaymentDAO} {@link JpaRepository} that will be injected.
+     */
     private final PaymentDAO paymentDAO;
 
     /**
-     * Parameterized constructor with the bean injections associated to the {@link PSQLAccountRepositoryImpl}
+     * Parameterized constructor with the bean injections associated to the {@link JPAAccountRepositoryImpl}
      * @param accountDAO the current {@link AccountDAO} bean implementation
-     * @param paymentDAO
+     * @param paymentDAO the current {@link PaymentDAO} bean implementation
      */
-    public PSQLAccountRepositoryImpl(final AccountDAO accountDAO, PaymentDAO paymentDAO) {
+    public JPAAccountRepositoryImpl(final AccountDAO accountDAO, PaymentDAO paymentDAO) {
         this.accountDAO = accountDAO;
         this.paymentDAO = paymentDAO;
     }
 
     @Override
     public final Optional<Account> findById(final Integer accountId) {
-        log.debug("(PSQLAccountRepositoryImpl) -> (findById): finding the account related with [{}]", accountId);
-        return this.accountDAO.findById(accountId).map(AccountEntity::map).filter(Account::isValid);
+        log.debug("(JPAAccountRepositoryImpl) -> (findById): finding the account related with [{}]", accountId);
+        return this.accountDAO.findById(accountId).map(AccountEntity::map);
     }
 
     @Override
     public final Account save(final Account account) {
-        log.debug("(PSQLAccountRepositoryImpl) -> (save): saving the account related with [{}] with the payments [{}]", account.getId(), account.getPayments().stream().map(Payment::getId));
+        log.debug("(JPAAccountRepositoryImpl) -> (save): saving the account related with [{}] with the payments [{}]", account.getId(), account.getPayments().stream().map(Payment::getId));
 
         // saving the updated account
         final var persistedAccount = this.accountDAO.save(AccountEntity.map(account));

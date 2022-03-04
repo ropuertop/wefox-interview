@@ -1,1 +1,16 @@
-com/wefox/payment/processor/ProcessorApplicationTests.class
+com/wefox/payment/processor/external/db/components/JPAAccountRepositoryImplTest.class
+com/wefox/payment/processor/core/service/components/OfflineAccountServiceImplTest.class
+com/wefox/payment/processor/external/client/logs/components/LogSystemImplTest$RegisterErrorLog.class
+com/wefox/payment/processor/aspects/LogSystemAspectTest$ProcessException.class
+com/wefox/payment/processor/core/service/components/OfflineAccountServiceImplTest$AddNewPayments.class
+com/wefox/payment/processor/aspects/LogSystemAspectTest.class
+com/wefox/payment/processor/external/client/verification/components/PaymentVerificatorImplTest.class
+com/wefox/payment/processor/core/service/components/OnlineAccountServiceImplTest$AddNewPayments.class
+com/wefox/payment/processor/core/service/components/OfflineAccountServiceImplTest$GetAccount.class
+com/wefox/payment/processor/external/client/verification/components/PaymentVerificatorImplTest$ValidatePayment.class
+com/wefox/payment/processor/external/db/components/JPAAccountRepositoryImplTest$Save.class
+com/wefox/payment/processor/events/components/PaymentProcessorImplTest.class
+com/wefox/payment/processor/core/service/components/OnlineAccountServiceImplTest.class
+com/wefox/payment/processor/external/db/components/JPAAccountRepositoryImplTest$FindById.class
+com/wefox/payment/processor/external/client/logs/components/LogSystemImplTest.class
+com/wefox/payment/processor/core/service/components/OnlineAccountServiceImplTest$GetAccount.class
