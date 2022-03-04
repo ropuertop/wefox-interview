@@ -16,7 +16,7 @@ import com.wefox.payment.processor.external.db.components.PSQLAccountRepositoryI
 public class OfflineAccountServiceImpl implements IAccountService {
 
     /**
-     * This {@link IAccountRepository} implementation
+     * The {@link IAccountRepository} implementation
      *
      * @see PSQLAccountRepositoryImpl
      */

@@ -3,7 +3,6 @@ package com.wefox.payment.processor.events.functions;
 import com.wefox.payment.processor.events.IPaymentProcessor;
 import com.wefox.payment.processor.events.model.PaymentDTO;
 import com.wefox.payment.processor.core.service.IAccountService;
-import com.wefox.payment.processor.core.service.components.OfflineAccountServiceImpl;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

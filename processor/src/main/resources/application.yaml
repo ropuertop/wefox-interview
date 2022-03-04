@@ -1,6 +1,6 @@
 spring:
     datasource:
-        url: jdbc:postgresql://localhost:5432/payments
+        url: jdbc:postgresql://postgress:5432/payments
         username: tech
         password: test
     jpa:
@@ -23,4 +23,4 @@ spring:
                 destination: online
             binder:
               brokers:
-                - localhost:29092
+                - kafka-server:9092

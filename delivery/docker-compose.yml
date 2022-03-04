@@ -53,6 +53,8 @@ services:
       - kafka-net
     volumes:
       - ./ApiAndProducer/bin:/app/
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     command:
       [
         "./wait-for-it.sh",
@@ -68,3 +70,15 @@ services:
     depends_on:
       - postgress
       - kafka-server
+
+  processor:
+    image: processor:latest
+    ports:
+      - "8080:8080"
+    networks:
+      - kafka-net
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      - kafka-server
+      - api-producer

@@ -35,7 +35,7 @@ public class PaymentVerificatorConnectionImpl implements IPaymentVerificatorConn
                 .writeValueAsString(payment);
 
         // creating the request
-        final var verificatorUrl = "http://localhost:9000/payment";
+        final var verificatorUrl = "http://host.docker.internal:9000/payment";
 
         final var request = HttpRequest
                 .newBuilder(new URI(verificatorUrl))
