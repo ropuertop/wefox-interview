@@ -61,7 +61,7 @@ As soon as you navigate to the processor code, you will see the following struct
 
 So I wanted to implement a very loosely coupled solution. For that reason, I used the *Spring Cloud Stream* + *Spring Cloud Function* tools. These tools are very useful because we can change of broker whenever we want, the Spring Cloud team can integrate with so many brokers services, so if we want to change to a RabbitMQ platform, we only need to change its application.yaml configuration (and maven dependencies, of course).
 
-<img src="/Users/rorigoooo/Library/Application Support/typora-user-images/image-20220303235256327.png" alt="image-20220303235256327" style="zoom:50%;" />
+<img src="./assets/image-20220303235256327.png" alt="image-20220303235256327" style="zoom:50%;" />
 
 You can find the **online** and **offline** entrypoints on the */events/functions* package, here I defined one bean for each input topic with the *onlinePayment* and *offlinePayment*. These beans will be binded on the *spring.cloud.stream.function.definition* property. I had also binded the topic with the associated function by the following property: *spring.cloud.stream.function.bindings*.
 
